@@ -15,18 +15,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 document.querySelectorAll('.nav a').forEach(link => {
   link.addEventListener('click', function(e) {
-    // Only handle navigation if on index.html
-    if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
-      e.preventDefault();
-      // Remove active from all
-      document.querySelectorAll('.nav a').forEach(l => l.classList.remove('active'));
-      this.classList.add('active');
-      // Hide all sections
-      document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
-      // Show selected section
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) target.style.display = 'block';
-    }
+    e.preventDefault();
+    // Remove active from all
+    document.querySelectorAll('.nav a').forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+    // Hide all sections
+    document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
+    // Show selected section
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.style.display = 'block';
   });
 });
 
