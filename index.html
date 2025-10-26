@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ARTS2065 Portfolio | Chelsea Nguyen</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
@@ -48,105 +49,64 @@
     </section>
     <section id="arts2065" class="page-section">
       <h2>ARTS2065 - Screen Production II</h2>
-      <div class="weeks-list">
-        <div class="week-block">
-          <h2> Week 1: Camera exercise</h2>
-          <div class="video-box">
-            <iframe width="600" height="338" src="https://www.youtube.com/embed/Oj7y8AOfiYc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <div class="scroller-wrapper">
+        <button class="scroller-btn scroller-left" aria-label="Scroll left" data-dir="-1">◀</button>
+        <div class="horizontal-scroll" aria-label="Weekly works" role="list" tabindex="0">
+        <div class="week-card" role="listitem" tabindex="0">
+          <h3>Week 1 — Camera exercise</h3>
+          <div class="card-video">
+            <iframe loading="lazy" src="https://www.youtube.com/embed/Oj7y8AOfiYc" title="Week 1 video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
-          <div class="desc-box">
-            <p>This is a camera exercise that practices point-of-view (POV) shooting. The short sequence shows a young man bursting into a classroom and grabbing his water bottle in desperation, only to find that it’s completely empty.</p>
-          </div>
+          <p class="card-desc">This is a camera exercise that practices point-of-view (POV) shooting. The short sequence shows a young man bursting into a classroom and grabbing his water bottle in desperation, only to find that it’s completely empty.</p>
         </div>
-        <div class="week-block">
-          <h2>Week 2: Transformative photo</h2>
-          <div class="video-box">
-            <iframe width="600" height="338" src="https://www.youtube.com/embed/IsM6ldvR0YE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div class="week-card" role="listitem" tabindex="0">
+          <h3>Week 2 — Transformative photo</h3>
+          <div class="card-video">
+            <iframe loading="lazy" src="https://www.youtube.com/embed/IsM6ldvR0YE" title="Week 2 video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
-          <div class="desc-box">
-            <p>This is a transformative photo exercise that begins as a still image and gradually unfolds like a film, intentionally tricking the audience at first. The sequence does not have a specific narrative but simply explores the inner world of a young girl studying music.</p>
-          </div>
+          <p class="card-desc">This is a transformative photo exercise that begins as a still image and gradually unfolds like a film, intentionally tricking the audience at first. The sequence does not have a specific narrative but simply explores the inner world of a young girl studying music.</p>
         </div>
-        <div class="week-block">
-          <h2>Week 3: Stalking exercise</h2>
-          <div class="video-box">
-            <iframe width="600" height="338" src="https://www.youtube.com/embed/xkdvBMKeMHc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div class="week-card" role="listitem" tabindex="0">
+          <h3>Week 3 — Stalking exercise</h3>
+          <div class="card-video">
+            <iframe loading="lazy" src="https://www.youtube.com/embed/xkdvBMKeMHc" title="Week 3 video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
-          <div class="desc-box">
-            <p>This is a stalking exercise. The sequence follows a boy whose blurred world turns upside down after he loses his glasses. A girl’s simple act of kindness leads to a moment of confusion and misunderstanding.</p>
-          </div>
+          <p class="card-desc">This is a stalking exercise. The sequence follows a boy whose blurred world turns upside down after he loses his glasses. A girl’s simple act of kindness leads to a moment of confusion and misunderstanding.</p>
         </div>
-        
-        <div class="week-block">
-          <h2>Week 4: Shot-reverse-shot</h2>
-          <div class="video-box">
-            <iframe width="600" height="338" src="https://www.youtube.com/embed/VLxEo-1mpXk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div class="week-card" role="listitem" tabindex="0">
+          <h3>Week 4 — Shot-reverse-shot</h3>
+          <div class="card-video">
+            <iframe loading="lazy" src="https://www.youtube.com/embed/VLxEo-1mpXk" title="Week 4 video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
-          <div class="desc-box">
-            <p>This is a SHOT-REVERSE-SHOT exercise.</p>
-          </div>
+          <p class="card-desc">This is a SHOT-REVERSE-SHOT exercise.</p>
         </div>
-        <div class="week-block">
-          <h2>Title: [Week 5 Title]</h2>
-          <div class="video-box">
-            <iframe width="600" height="338" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-          <h3>Synopsis</h3>
-          <div class="desc-box">
-            <p>[Week 5 synopsis goes here]</p>
-          </div>
+        <!-- empty placeholder cards for weeks 5-10 -->
+        <div class="week-card empty" role="listitem" tabindex="0">Week 5</div>
+        <div class="week-card empty" role="listitem" tabindex="0">Week 6</div>
+        <div class="week-card empty" role="listitem" tabindex="0">Week 7</div>
+        <div class="week-card empty" role="listitem" tabindex="0">Week 8</div>
+        <div class="week-card empty" role="listitem" tabindex="0">Week 9</div>
+        <div class="week-card empty" role="listitem" tabindex="0">Week 10</div>
         </div>
-        <div class="week-block">
-          <h2>Title: [Week 6 Title]</h2>
-          <div class="video-box">
-            <iframe width="600" height="338" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-          <h3>Synopsis</h3>
-          <div class="desc-box">
-            <p>[Week 6 synopsis goes here]</p>
-          </div>
-        </div>
-        <div class="week-block">
-          <h2>Title: [Week 7 Title]</h2>
-          <div class="video-box">
-            <iframe width="600" height="338" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-          <h3>Synopsis</h3>
-          <div class="desc-box">
-            <p>[Week 7 synopsis goes here]</p>
-          </div>
-        </div>
-        <div class="week-block">
-          <h2>Title: [Week 8 Title]</h2>
-          <div class="video-box">
-            <iframe width="600" height="338" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-          <h3>Synopsis</h3>
-          <div class="desc-box">
-            <p>[Week 8 synopsis goes here]</p>
-          </div>
-        </div>
-        <div class="week-block">
-          <h2>Title: [Week 9 Title]</h2>
-          <div class="video-box">
-            <iframe width="600" height="338" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-          <h3>Synopsis</h3>
-          <div class="desc-box">
-            <p>[Week 9 synopsis goes here]</p>
-          </div>
-        </div>
-        <div class="week-block">
-          <h2>Title: [Week 10 Title]</h2>
-          <div class="video-box">
-            <iframe width="600" height="338" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-          <h3>Synopsis</h3>
-          <div class="desc-box">
-            <p>[Week 10 synopsis goes here]</p>
-          </div>
-        </div>
+        <button class="scroller-btn scroller-right" aria-label="Scroll right" data-dir="1">▶</button>
       </div>
+      <div class="scroller-indicators" aria-hidden="false" role="tablist" aria-label="Week indicators"></div>
+
+      <!-- Assessments -->
+      <section class="assessments">
+        <h2>Assessments</h2>
+        <div class="assessments-list">
+          <div class="assessment-item">
+            <h3>Assessment 1 — Photo Essay</h3>
+            <div class="assessment-video">
+              <iframe loading="lazy" src="https://www.youtube.com/embed/iZdi0-rzTDc" title="Assessment 1 video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="assessment-desc">
+              <p><strong>(Dear em,)</strong> follows a 19-year-old girl through the quiet collapse of her family and her sense of self. In memories, loneliness, and healing, she learns that letting go is part of growing up. Inspired by the creator's own story, the short film captures that fragile space between girlhood and becoming.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
   </main>
   <footer>
