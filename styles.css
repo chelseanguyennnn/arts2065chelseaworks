@@ -1,110 +1,457 @@
-// Portfolio site minimal JS (add interactivity if needed)
-// Example: Smooth scroll for anchor links
+body {
+  /* Vietnamese-inspired palette: faded yellow background, green text, deep red accent */
+  --bg-cream: #FFF1C2; /* slightly warmer faded yellow */
+  --ink-green: #2E6B3E; /* verdant green for body text */
+  --accent-red: #8B1E2D; /* deep red highlight */
+  --border-weak: rgba(46,107,62,0.08);
+  --text-muted: rgba(46,107,62,0.65);
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-});
+  background: var(--bg-cream);
+  color: var(--ink-green);
+  font-family: 'Noto Serif Display', Georgia, 'Times New Roman', serif;
+  margin: 0;
+  padding: 0;
+}
 
-// Navigation for single-page sections
+header {
+  background: transparent;
+  color: var(--ink-green);
+  border-bottom: 1px solid var(--border-weak);
+  padding: 1.5rem 0 1rem 0;
+  text-align: center;
+}
 
-document.querySelectorAll('.nav a').forEach(link => {
-  link.addEventListener('click', function(e) {
-    e.preventDefault();
-    // Remove active from all
-    document.querySelectorAll('.nav a').forEach(l => l.classList.remove('active'));
-    this.classList.add('active');
-    // Hide all sections
-    document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
-    // Show selected section
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) target.style.display = 'block';
-  });
-});
+nav {
+  margin-bottom: 0.5rem;
+}
 
-// Show correct section by hash on load
-window.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
-  let hash = window.location.hash || '#arts2065';
-  const section = document.querySelector(hash);
-  if (section) section.style.display = 'block';
-  // Set active nav
-  document.querySelectorAll('.nav a').forEach(l => l.classList.remove('active'));
-  const nav = document.querySelector('.nav a[href="' + hash + '"]');
-  if (nav) nav.classList.add('active');
+.nav {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0;
+  margin: 0 0 0.5rem 0;
+}
 
-  // Project popups
-  document.querySelectorAll('.project-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const num = this.getAttribute('data-project');
-      const popup = document.getElementById('project-popup-' + num);
-      if (popup) popup.style.display = 'flex';
-    });
-  });
-  document.querySelectorAll('.close-popup').forEach(close => {
-    close.addEventListener('click', function() {
-      const num = this.getAttribute('data-close');
-      const popup = document.getElementById('project-popup-' + num);
-      if (popup) popup.style.display = 'none';
-    });
-  });
-  // Close popup on background click
-  document.querySelectorAll('.project-popup').forEach(popup => {
-    popup.addEventListener('click', function(e) {
-      if (e.target === this) this.style.display = 'none';
-    });
-  });
-  // === Horizontal scroller UX enhancements ===
-  const scroller = document.querySelector('.horizontal-scroll');
-  const leftBtn = document.querySelector('.scroller-left');
-  const rightBtn = document.querySelector('.scroller-right');
-  const indicatorsContainer = document.querySelector('.scroller-indicators');
-  if (scroller) {
-    const cards = Array.from(scroller.querySelectorAll('.week-card'));
-    // create indicators
-    cards.forEach((c, i) => {
-      const btn = document.createElement('button');
-      btn.setAttribute('aria-label', 'Go to week ' + (i + 1));
-      btn.setAttribute('role', 'tab');
-      btn.dataset.index = i;
-      if (i === 0) btn.setAttribute('aria-selected', 'true');
-      indicatorsContainer.appendChild(btn);
-      btn.addEventListener('click', () => {
-        cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-      });
-    });
+.nav li {
+  display: inline;
+}
 
-    // button scrolling
-    function scrollByCard(dir) {
-      const cardWidth = cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(scroller).gap || 16);
-      scroller.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
-    }
-    if (leftBtn) leftBtn.addEventListener('click', () => scrollByCard(-1));
-    if (rightBtn) rightBtn.addEventListener('click', () => scrollByCard(1));
+.nav a {
+  color: var(--ink-green);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.05rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
 
-    // keyboard navigation when scroller focused
-    scroller.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); scrollByCard(1); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); scrollByCard(-1); }
-    });
+.nav a.active, .nav a:hover {
+  background: var(--accent-red);
+  color: var(--bg-cream);
+}
 
-    // IntersectionObserver to set active indicator
-    const options = { root: scroller, threshold: 0.6 };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const idx = cards.indexOf(entry.target);
-          const dots = Array.from(indicatorsContainer.children);
-          dots.forEach(d => d.removeAttribute('aria-selected'));
-          if (dots[idx]) dots[idx].setAttribute('aria-selected', 'true');
-        }
-      });
-    }, options);
-    cards.forEach(c => observer.observe(c));
+h1, h2, h3 {
+  font-family: 'Noto Serif Display', Georgia, 'Times New Roman', serif;
+}
+
+h2 {
+  margin-left: 1.5rem;
+}
+
+@media (max-width: 700px) {
+  h2 {
+    margin-left: 0.7rem;
   }
-});
+}
+
+main {
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+.page-section {
+  display: block;
+}
+
+.weeks-list, .assignments-list {
+  margin: 2rem 0 0 0;
+}
+
+.week-block, .assignment-block {
+  border: 1px solid var(--border-weak);
+  border-radius: 0;
+  padding: 2rem 2rem 2rem 3.5rem;
+  margin-bottom: 1.2rem;
+  background: rgba(255,246,214,0.85);
+  width: 100vw;
+  min-height: 80vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  backdrop-filter: blur(1px);
+}
+
+.video-box {
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 700px) {
+  .week-block, .assignment-block {
+    min-height: 90vh;
+    padding: 1rem 0.5rem 1rem 1.2rem;
+  }
+  .video-box iframe {
+    width: 100% !important;
+    height: 200px !important;
+  }
+}
+
+/* Horizontal weekly cards */
+.horizontal-scroll {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.horizontal-scroll .week-card {
+  scroll-snap-align: start;
+  min-width: 320px;
+  width: calc(100vw - 4rem);
+  max-width: 720px;
+  background: rgba(255,246,214,0.96); /* slightly warmer card background */
+  border: 1px solid var(--border-weak);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 6px 18px rgba(46,107,62,0.06);
+  box-sizing: border-box;
+}
+
+/* Scroller wrapper and controls */
+.scroller-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.scroller-btn {
+  background: transparent;
+  border: 1px solid var(--border-weak);
+  color: var(--ink-green);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.scroller-btn:hover {
+  background: var(--accent-red);
+  color: var(--bg-cream);
+  border-color: rgba(139,30,45,0.18);
+}
+.scroller-btn:focus {
+  outline: 2px solid rgba(139,30,45,0.12);
+}
+.scroller-indicators {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.8rem;
+}
+.scroller-indicators button {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(46,107,62,0.12);
+  border: none;
+  cursor: pointer;
+}
+.scroller-indicators button[aria-selected="true"] {
+  background: var(--accent-red);
+}
+
+.horizontal-scroll:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(46,107,62,0.04);
+}
+.horizontal-scroll .week-card h3 {
+  margin-top: 0;
+}
+.card-video iframe {
+  width: 100%;
+  height: 220px;
+  border-radius: 6px;
+  border: 1px solid var(--border-weak);
+}
+.card-desc {
+  margin-top: 0.8rem;
+  font-family: 'Noto Serif Display', Georgia, 'Times New Roman', serif;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.week-card.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 1.05rem;
+}
+
+/* Assessments */
+.assessments {
+  padding: 1.2rem 1.2rem 2rem 1.2rem;
+}
+.assessments-list {
+  margin-top: 0.8rem;
+}
+.assessment-item {
+  background: rgba(255,246,214,0.98);
+  border: 1px solid var(--border-weak);
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 900px;
+  box-shadow: 0 4px 14px rgba(46,107,62,0.04);
+}
+  .assessment-video iframe {
+  width: 100%;
+  height: 360px;
+  border-radius: 6px;
+  border: 1px solid var(--border-weak);
+}
+
+@media (max-width: 700px) {
+  .card-video iframe { height: 180px; }
+  .assessment-video iframe { height: 200px; }
+  .horizontal-scroll .week-card { width: calc(100vw - 2rem); min-width: 280px; }
+}
+
+footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+  padding: 1.2rem 0 1rem 0;
+  background: transparent;
+  border-top: 1px solid var(--border-weak);
+  margin-top: 2rem;
+}
+
+.project-list {
+  display: flex;
+  gap: 2rem;
+  margin: 2rem 0 0 1.5rem;
+}
+
+.project-hover-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.project-intro {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 110%;
+  min-width: 320px;
+  max-width: 350px;
+  background: rgba(255,246,214,0.98);
+  color: var(--ink-green);
+  border: 1px solid var(--border-weak);
+  border-radius: 8px;
+  padding: 1rem 1rem 0.9rem 1rem;
+  font-size: 1rem;
+  z-index: 10;
+  box-shadow: 0 4px 20px rgba(46,107,62,0.08);
+  pointer-events: none;
+}
+
+.project-hover-box:hover .project-intro,
+.project-hover-box:focus-within .project-intro {
+  display: block;
+}
+
+.project-btn {
+  font-size: 1.05rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(46,107,62,0.12);
+  background: transparent;
+  color: var(--ink-green);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  position: relative;
+  z-index: 11;
+}
+
+.project-btn:hover {
+  background: transparent;
+  color: var(--bg-cream);
+  box-shadow: 0 0 0 2px rgba(139,30,45,0.12) inset;
+  border-color: var(--accent-red);
+}
+
+/* Remove hover effect from .project-btn itself, only .project-hover-box triggers the intro */
+
+.dropbox-h2 {
+  margin-bottom: 2rem;
+}
+
+.dropbox-h2 summary {
+  cursor: pointer;
+  outline: none;
+  list-style: none;
+}
+
+.dropbox-h2[open] summary h2::after {
+  content: "▲";
+  font-size: 1rem;
+  margin-left: 0.7rem;
+}
+
+.dropbox-h2 summary h2::after {
+  content: "▼";
+  font-size: 1rem;
+  margin-left: 0.7rem;
+}
+
+.dropbox-h2 summary h2 {
+  display: inline;
+}
+
+.dropbox-h2 > *:not(summary) {
+  margin-left: 1.5rem;
+}
+
+.essay-content {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.essay-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.7rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.essay-content p {
+  margin-bottom: 1.1rem;
+}
+.essay-bibliography {
+  margin-top: 1.5rem;
+  margin-left: 0.5rem;
+  padding-left: 1.2rem;
+  font-size: 0.98rem;
+}
+.essay-bibliography li {
+  margin-bottom: 0.7rem;
+  word-break: break-word;
+}
+.essay-bibliography a {
+  color: var(--ink-green);
+  text-decoration: underline;
+}
+
+.iframe-container {
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.iframe-container iframe {
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  background: var(--bg-cream);
+}
+
+.iframe-fullpage-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: var(--ink-green);
+  background: var(--bg-cream);
+  border: 1px solid var(--ink-green);
+  border-radius: 5px;
+  padding: 0.3rem 1.1rem;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.iframe-fullpage-link:hover {
+  background: var(--accent-red);
+  color: var(--bg-cream);
+  border-color: var(--accent-red);
+}
+
+.iframe-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 0.5rem;
+  margin-top: 2.2rem;
+}
+.iframe-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.project1-section {
+  padding-left: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.project1-section h2 {
+  margin-bottom: 1.2rem;
+  font-size: 1.4rem;
+}
+.project1-desc p {
+  margin-bottom: 1.1rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.project2-section {
+  padding-left: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.project2-section h2 {
+  margin-bottom: 1.2rem;
+  font-size: 1.4rem;
+}
+.project2-desc p {
+  margin-bottom: 1.1rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.project0-confession p {
+  margin-bottom: 1.1rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+.project0-confession {
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.video-box {
+  margin-bottom: 1.5rem;
+}
+
+#arts2065.page-section h2 {
+  text-align: center;
+}
+
