@@ -8,6 +8,8 @@ body {
 
   background: var(--bg-cream);
   color: var(--ink-green);
+  /* Make body text justified by default; override headings to remain left-aligned */
+  text-align: justify;
   font-family: 'Noto Serif Display', Georgia, 'Times New Roman', serif;
   margin: 0;
   padding: 0;
@@ -55,6 +57,19 @@ nav {
 
 h1, h2, h3 {
   font-family: 'Noto Serif Display', Georgia, 'Times New Roman', serif;
+  /* Headings should remain left-aligned rather than justified */
+  text-align: left;
+}
+
+/* Ensure the site title in the header remains centered (overrides global heading rule) */
+header h1 {
+  text-align: center;
+  margin: 0.2rem 0 0.6rem 0;
+}
+
+/* Paragraph spacing: use margin-bottom instead of <br> tags */
+p {
+  margin-bottom: 1rem;
 }
 
 h2 {
@@ -126,9 +141,9 @@ main {
 }
 .horizontal-scroll .week-card {
   scroll-snap-align: start;
-  min-width: 320px;
+  min-width: 420px;
   width: calc(100vw - 4rem);
-  max-width: 720px;
+  max-width: 920px;
   background: rgba(255,246,214,0.96); /* slightly warmer card background */
   border: 1px solid var(--border-weak);
   border-radius: 10px;
@@ -215,6 +230,89 @@ main {
 }
 .assessments-list {
   margin-top: 0.8rem;
+  /* Two-column layout: assessment + process box side-by-side on wide screens.
+     Make the assessment wider (2fr) and the process box smaller (1fr). */
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+/* If there's only one child, keep it centered and full width */
+.assessments-list:only-child {
+  grid-template-columns: 1fr;
+}
+
+/* Process box styles (right column) */
+.process-item {
+  background: rgba(255,246,214,0.98);
+  border: 1px solid var(--border-weak);
+  padding: 0.6rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(46,107,62,0.04);
+  /* ensure the process box doesn't force wide minimums */
+  min-width: 0;
+}
+.process-item h3 {
+  margin-top: 0;
+}
+
+.process-content {
+  /* kept for compatibility if notes are used outside the scroller */
+  margin-top: 0.6rem;
+  color: var(--ink-green);
+  line-height: 1.6;
+}
+
+/* Horizontal media scroller inside the process box */
+.process-media {
+  display: flex;
+  gap: 0.8rem;
+  overflow-x: auto;
+  padding: 0.5rem 0 0.5rem 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.process-media .media-card {
+  min-width: 240px;
+  max-width: 360px;
+  scroll-snap-align: start;
+  background: rgba(255,255,255,0.6);
+  border-radius: 6px;
+  padding: 0.6rem;
+  border: 1px solid var(--border-weak);
+  box-sizing: border-box;
+}
+/* First card (notes) should occupy the full visible width of the process box */
+.process-media .media-card.media-note {
+  min-width: 100%;
+  max-width: 100%;
+  scroll-snap-align: start;
+}
+
+/* Larger media cards for selected images (e.g., Remake 2/3/4) */
+.process-media .media-card.media-large {
+  min-width: 420px;
+  max-width: 520px;
+}
+.process-media img,
+.process-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.media-placeholder-link {
+  display: inline-block;
+  margin-top: 0.45rem;
+  color: var(--ink-green);
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .assessments-list {
+    grid-template-columns: 1fr;
+  }
 }
 .assessment-item {
   background: rgba(255,246,214,0.98);
